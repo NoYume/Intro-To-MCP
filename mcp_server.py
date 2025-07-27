@@ -6,12 +6,21 @@ mcp = FastMCP("DocumentMCP")
 
 
 docs = {
-    "deposition.md": "This deposition covers the testimony of Angela Smith, P.E.",
-    "report.pdf": "The report details the state of a 20m condenser tower.",
-    "financial.docx": "These financial outline the project's budget and expenditures.",
-    "outlook.pdf": "This document presents the projected future performance of the system.",
-    "plan.md": "The plan outlines the steps for the project's implementation.",
-    "spec.txt": "These specifications define the technical requirements for the equipment.",
+    "deposition.md": "This deposition covers the testimony of Angela Smith, P.E., regarding the structural integrity of the condenser tower. Key  points include material fatigue analysis and maintenance history.",
+    "report.pdf": "The report details the state of a 20m condenser tower, including its operational efficiency, recent inspections, and recommendations for future upgrades to improve performance.",
+    "financial.docx": "This document outlines the project's budget and expenditures, including a breakdown of costs for materials, labor, and contingency funds. It also highlights areas where cost overruns have occurred.",
+    "outlook.pdf": "This document presents the projected future performance of the system, including expected output, maintenance schedules, and potential risks. It also includes a comparison with industry benchmarks.",
+    "plan.md": "The plan outlines the steps for the project's implementation, including timelines, resource allocation, and key milestones. It also identifies potential bottlenecks and mitigation strategies.",
+    "spec.txt": "These specifications define the technical requirements for the equipment, including material properties, dimensions, and performance criteria. It also includes compliance with industry standards and certifications.",
+    "meeting_notes.txt": "Notes from the project kickoff meeting held on July 15, 2025. Topics discussed include project scope, team assignments, and initial deadlines. Action items were assigned to team leads for follow-up.",
+    "risk_assessment.docx": "This document evaluates potential risks associated with the project, including financial, operational, and environmental risks. It provides a risk matrix and mitigation strategies for each identified risk.",
+    "design_review.pdf": "The design review document includes feedback from stakeholders on the initial design. It highlights areas for improvement, such as structural reinforcements and cost optimizations.",
+    "timeline.xlsx": "A detailed project timeline, including Gantt charts for each phase of the project. It specifies start and end dates, dependencies, and resource allocations.",
+    "user_manual.md": "The user manual provides step-by-step instructions for operating the system. It includes troubleshooting tips, maintenance schedules, and safety precautions.",
+    "case_study.pdf": "A case study analyzing a similar project completed in 2023. It discusses lessons learned, challenges faced, and how they were overcome.",
+    "contract.docx": "The contract outlines the terms and conditions between the client and the contractor. It includes payment schedules, deliverables, and penalties for delays.",
+    "environmental_report.pdf": "This report assesses the environmental impact of the project, including emissions, waste management, and compliance with regulations. It also suggests measures to minimize the environmental footprint.",
+    "training_materials.pptx": "Slides for training sessions on using the new system. Topics include system overview, key features, and troubleshooting common issues."
 }
 
 
