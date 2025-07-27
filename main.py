@@ -30,7 +30,7 @@ async def main():
     clients = {}
 
     command, args = (
-        ("uv", ["run", "mcp_server.py"])
+        ("fastmcp", ["run", "mcp_server.py"])
         if os.getenv("USE_UV", "0") == "1"
         else ("python", ["mcp_server.py"])
     )
