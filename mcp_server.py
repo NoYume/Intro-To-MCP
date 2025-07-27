@@ -1,7 +1,7 @@
 from pydantic import Field
-from mcp.server.fastmcp import FastMCP
+from fastmcp import FastMCP
 
-mcp = FastMCP("DocumentMCP", log_level="ERROR")
+mcp = FastMCP("DocumentMCP")
 
 
 docs = {
@@ -46,4 +46,4 @@ def edit_document(
 
 
 if __name__ == "__main__":
-    mcp.run(transport="stdio")
+    mcp.run(transport="stdio", log_level="ERROR")
