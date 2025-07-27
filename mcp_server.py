@@ -81,12 +81,29 @@ def format_document(
     Use the 'edit_document' tool to edit the document. After the document has been reformatted...
     """
     
-    return [
-        base.UserMessage(prompt)
-    ]
+    return [base.UserMessage(prompt)]
     
     
-# TODO: Write a prompt to summarize a doc
+@mcp.prompt(
+    name="summarize",
+    description="Summarize the contents of the document"
+)
+def summarize_document(
+    doc_id: str=Field(description="Id of the document to summarize")
+) -> list[base.Message]:
+    prompt =f"""
+    Your goal is to summarize a document
+    
+    The id of the document you need to summarize is:
+    <document_id>
+    {doc_id}
+    </document_id>
+    
+    Make the summarization detailed, clear, and concise. Feel free to add to any missing gaps of information.
+    Use the 'edit_document' tool to edit the document. After the document has been summarized...
+    """
+
+    return [base.UserMessage(prompt)]
 
 
 if __name__ == "__main__":
