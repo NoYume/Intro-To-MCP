@@ -1,111 +1,166 @@
-# MCP Chat
+# Intro to MCP (Model Context Protocol)
 
-MCP Chat is a command-line interface application that enables interactive chat capabilities with AI models through the Anthropic API. The application supports document retrieval, command-based prompts, and extensible tool integrations via the MCP (Model Control Protocol) architecture.
+A simple introduction project demonstrating how to build and interact with MCP clients and servers using Claude AI. This project showcases the fundamentals of MCP architecture, including document management, tool calling, and prompt templates.
 
-## Prerequisites
+## What This Project Does
 
-- Python 3.9+
-- Anthropic API Key
+This project implements a CLI-based chat application that demonstrates:
+
+- **MCP Server**: A document management server that provides tools and resources for handling documents
+- **MCP Client**: A client that connects to MCP servers and facilitates communication with Claude AI
+- **Interactive CLI**: A rich terminal interface with auto-completion, command suggestions, and document references
+- **Document Management**: CRUD operations on documents with formatting and summarization capabilities
+- **Tool Integration**: Seamless integration between Claude AI and MCP tools
+
+### Key Features
+
+- 📄 **Document Management**: Read, edit, and manage documents through MCP resources
+- 🔧 **Tool Calling**: Execute MCP tools directly from Claude AI conversations
+- 💬 **Interactive Chat**: Chat with Claude AI using document context and MCP capabilities
+- 🎯 **Command System**: Use `/format` and `/summarize` commands for document operations
+- 📝 **Resource References**: Reference documents using `@document.ext` syntax
+
+## Project Structure
+
+```
+├── core/                   # Core application modules
+│   ├── chat.py            # Base chat functionality
+│   ├── claude.py          # Claude AI integration
+│   ├── cli_chat.py        # CLI-specific chat implementation
+│   ├── cli.py             # Rich terminal interface
+│   └── tools.py           # MCP tool management
+├── main.py                # Application entry point
+├── mcp_client.py          # MCP client implementation
+├── mcp_server.py          # MCP server with document tools
+└── pyproject.toml         # Project dependencies
+```
 
 ## Setup
 
-### Step 1: Configure the environment variables
+### Prerequisites
 
-1. Create or edit the `.env` file in the project root and verify that the following variables are set correctly:
+- Python 3.10+
+- [uv](https://docs.astral.sh/uv/) package manager
+- Anthropic API key
 
-```
-ANTHROPIC_API_KEY=""  # Enter your Anthropic API secret key
-```
+### Installation
 
-### Step 2: Install dependencies
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd Intro-To-MCP
+   ```
 
-#### Option 1: Setup with uv (Recommended)
+2. **Install dependencies**
+   ```bash
+   uv sync
+   ```
 
-[uv](https://github.com/astral-sh/uv) is a fast Python package installer and resolver.
+3. **Configure environment**
+   Create a `.env` file with your configuration:
+   ```env
+   ANTHROPIC_API_KEY=your_anthropic_api_key_here
+   CLAUDE_MODEL=claude-3-5-sonnet-20241022
+   USE_UV=1
+   ```
 
-1. Install uv, if not already installed:
+## Usage
 
-```bash
-pip install uv
-```
-
-2. Create and activate a virtual environment:
-
-```bash
-uv venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-```
-
-3. Install dependencies:
-
-```bash
-uv pip install -e .
-```
-
-4. Run the project
+### Starting the Application
 
 ```bash
 uv run main.py
 ```
 
-#### Option 2: Setup without uv
+This will start the interactive CLI with the MCP server running in the background.
 
-1. Create and activate a virtual environment:
+### Basic Commands
+
+#### Document References
+Reference documents in your chat using the `@` syntax:
+```
+> What does @report.pdf say about the condenser tower?
+```
+
+#### MCP Commands
+Use slash commands to execute MCP prompts:
+```
+> /format report.pdf        # Format document as Markdown
+> /summarize plan.md        # Summarize document content
+```
+
+#### Available Documents
+The demo includes these sample documents:
+- `deposition.md` - Legal deposition testimony
+- `report.pdf` - Technical condenser tower report
+- `financial.docx` - Project budget and expenditures
+- `outlook.pdf` - System performance projections
+- `plan.md` - Project implementation plan
+- `spec.txt` - Technical equipment specifications
+
+### Example Interactions
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+# Chat with document context
+> Can you analyze the budget in @financial.docx?
+
+# Format a document
+> /format plan.md
+
+# Ask questions about multiple documents
+> Compare the timeline in @plan.md with the budget in @financial.docx
 ```
 
-2. Install dependencies:
+## How MCP Works in This Project
 
-```bash
-pip install anthropic python-dotenv prompt-toolkit "mcp[cli]==1.8.0"
-```
+### Server-Client Architecture
 
-3. Run the project
+1. **MCP Server** ([`mcp_server.py`](mcp_server.py))
+   - Hosts document resources and tools
+   - Provides `/format` and `/summarize` prompts
+   - Manages document storage and retrieval
 
-```bash
-python main.py
-```
+2. **MCP Client** ([`mcp_client.py`](mcp_client.py))
+   - Connects to MCP servers via stdio transport
+   - Handles tool calls and resource requests
+   - Manages the communication protocol
 
-## Usage
+3. **Chat Integration** ([`core/chat.py`](core/chat.py))
+   - Orchestrates Claude AI conversations
+   - Executes MCP tool calls automatically
+   - Manages conversation context and history
 
-### Basic Interaction
+### Tool Flow
 
-Simply type your message and press Enter to chat with the model.
+1. User inputs query or command
+2. [`CliChat`](core/cli_chat.py) processes input and extracts document references
+3. [`ToolManager`](core/tools.py) handles tool discovery and execution
+4. [`Claude`](core/claude.py) service processes the request with available tools
+5. Results are displayed in the terminal
 
-### Document Retrieval
+## Learning Objectives
 
-Use the @ symbol followed by a document ID to include document content in your query:
+This project demonstrates:
 
-```
-> Tell me about @deposition.md
-```
+- **MCP Protocol Basics**: Understanding client-server communication
+- **Tool Integration**: How AI models can execute external tools
+- **Resource Management**: Serving and consuming MCP resources
+- **Prompt Templates**: Creating reusable prompt patterns
+- **Event-Driven Architecture**: Handling async operations in MCP
 
-### Commands
+## Technical Details
 
-Use the / prefix to execute commands defined in the MCP server:
+### Dependencies
 
-```
-> /summarize deposition.md
-```
+- **`anthropic`**: Claude AI API client
+- **`fastmcp`**: Fast MCP server implementation
+- **`mcp`**: Official MCP SDK
+- **`prompt-toolkit`**: Rich terminal interface
+- **`pydantic`**: Data validation and settings
 
-Commands will auto-complete when you press Tab.
+### Key Classes
 
-## Development
-
-### Adding New Documents
-
-Edit the `mcp_server.py` file to add new documents to the `docs` dictionary.
-
-### Implementing MCP Features
-
-To fully implement the MCP features:
-
-1. Complete the TODOs in `mcp_server.py`
-2. Implement the missing functionality in `mcp_client.py`
-
-### Linting and Typing Check
-
-There are no lint or type checks implemented.
+- [`MCPClient`](mcp_client.py): Manages MCP server connections
+- [`CliChat`](core/cli_chat.py): Handles CLI-specific chat logic
+- [`ToolManager`](core/tools.py): Orchestrates tool execution
+- [`UnifiedCompleter`](core/cli.py): Provides intelligent auto-completion
