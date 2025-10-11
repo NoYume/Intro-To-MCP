@@ -14,11 +14,11 @@ This project implements a CLI-based chat application that demonstrates:
 
 ### Key Features
 
-- 📄 **Document Management**: Read, edit, and manage documents through MCP resources
-- 🔧 **Tool Calling**: Execute MCP tools directly from Claude AI conversations
-- 💬 **Interactive Chat**: Chat with Claude AI using document context and MCP capabilities
-- 🎯 **Command System**: Use `/format` and `/summarize` commands for document operations
-- 📝 **Resource References**: Reference documents using `@document.ext` syntax
+-  **Document Management**: Read, edit, and manage documents through MCP resources
+-  **Tool Calling**: Execute MCP tools directly from Claude AI conversations
+-  **Interactive Chat**: Chat with Claude AI using document context and MCP capabilities
+-  **Command System**: Use `/format` and `/summarize` commands for document operations
+-  **Resource References**: Reference documents using `@document.ext` syntax
 
 ## Project Structure
 
